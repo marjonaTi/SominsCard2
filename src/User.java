@@ -10,7 +10,12 @@ public class User {
     private int age;
     private String gender;
 
-    public User(Integer iD, String name, String surname, int age, Gender gender) {
+    public User(Integer iD, String name, String surname, int age, String gender) {
+        this.userId = iD;
+        this.name = name;
+        this.surname = surname;
+        this.age = age;
+        this.gender = gender;
     }
 
 //    private List<User> userList = new ArrayList<>();
@@ -63,22 +68,16 @@ public class User {
 //    }
 
 
-    public User() {
-        this.userId = userId;
-        this.name = this.name;
-        this.surname = this.surname;
-        this.age = this.age;
-        this.gender = this.gender;
-    }
+
 
     @Override
     public String toString() {
         return "USER:  " +
-                "Id: " + userId +
-                ", Name: " + name +
-                ", Surname: " + surname +
-                ", Age: " + age +
-                ", Gender: " + gender + '\'' ;
+                " Id: " + userId +
+                " , Name: " + name +
+                " , Surname: " + surname +
+                " , Age: " + age +
+                " , Gender: " + gender +  '\'' ;
     }
 
     public boolean changeUserName(Integer userID , String newName){

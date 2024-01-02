@@ -13,18 +13,14 @@ public class Card {
     private List<Card> cardList = new ArrayList<>();
 
 
-    public Card() {
-        this.cardId = this.cardId;
-        this.balance = balance;
+    public Card( String expirationDate, String ownerInfo, short pinCode) {
         this.pinCode = pinCode;
-        this.expriationDate = expriationDate;
-        this.ownerData = ownerData;
-        this.cardStatus = cardStatus;
-        this.cardList = cardList;
+        this.expriationDate = expirationDate;
+        this.ownerData = ownerInfo;
+
     }
 
-    public Card(String cardId, String expirationDate, String ownerInfo, short pinCode) {
-    }
+
 
     public String getCardId() {
         return cardId;
@@ -94,7 +90,7 @@ public class Card {
                  '\'' ;
     }
 
-    public void  addMoney (UUID cardid, short pincode,Integer blnc){
+    public void  addMoney (String cardid, short pincode,Double blnc){
         for (Card card: getCardList()) {
             if (card.getCardId().equals(cardid) && card.getPinCode() == pincode){
                 if (blnc != null && blnc >0){

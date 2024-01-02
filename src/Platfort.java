@@ -22,7 +22,7 @@ public class Platfort {
 
  public void addCard(String expirationDate, String ownerInfo, short pinCode) {
   String cardId = generateRandomId();
-  Card card = new Card(cardId, expirationDate, ownerInfo, pinCode);
+  Card card = new Card( expirationDate, ownerInfo, pinCode);
   cardMap.put(cardId, card);
   System.out.println("Карта добавлена. ID карты: " + cardId);
  }
@@ -48,7 +48,7 @@ public class Platfort {
 
 
 
- public void addUser(Integer iD, String name, String surname, int age, Gender gender) {
+ public void addUser(Integer iD, String name, String surname, int age, String gender) {
   User user = new User(iD, name, surname, age, gender);
   userMap.put(iD, user);
   System.out.println("Пользователь добавлен");
@@ -68,11 +68,11 @@ public class Platfort {
 public  void showUser(){
  for (User user: userMap.values()) {
   System.out.println("USER:" +
-                    "Id: " + user.getId() +
-                    "Name: " + user.getName() +
-                    "Surname: " + user.getSurname() +
-                    "Gender: " + user.getGender() +
-                    "Age: " + user.getAge());
+                    " Id: " + user.getId() +
+                    " Name: " + user.getName() +
+                    " Surname: " + user.getSurname() +
+                    " Gender: " + user.getGender() +
+                    " Age: " + user.getAge());
 
    }
   }
