@@ -109,7 +109,7 @@ public class Card {
 
 
     public boolean changePinCode(Card card, String ownerData, short newPin) {
-        if (card != null && card.getOwnerData().endsWith(ownerData)) {
+        if (card != null && card.getOwnerData().equals(ownerData)) {
             card.setPinCode(newPin);
             return true;
         } else {
@@ -119,7 +119,7 @@ public class Card {
 
 
     public boolean changeOwnerData(Card card, String ownerData, String newOwnerData){
-        if (card != null && card.getOwnerData().endsWith(ownerData)){
+        if (card != null && card.getOwnerData().equals(ownerData)){
             card.setOwnerData(newOwnerData);
             return true;
         } else {

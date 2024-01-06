@@ -18,7 +18,7 @@ public class User {
         this.gender = gender;
     }
 
-//    private List<User> userList = new ArrayList<>();
+
 
     public Integer getId() {
         return userId;
@@ -81,7 +81,7 @@ public class User {
     }
 
     public boolean changeUserName(Integer userID , String newName){
-        if (this.userId.equals(userID)){
+        if (this.userId == userID){
             this.name = newName;
             return true;
         } else {
@@ -90,7 +90,7 @@ public class User {
     }
 
     public boolean changeSurname(Integer userID, String newSurname){
-        if (this.userId.equals(userID)){
+        if (this.userId == userID){
             this.surname = newSurname;
             return true;
         }else {
@@ -100,7 +100,7 @@ public class User {
 
 
     public boolean changeAge(Integer userID, Integer newAge){
-        if (this.userId.equals(userID)){
+        if (this.userId == userID){
             this.age = newAge;
             return true;
         } else {
@@ -110,7 +110,7 @@ public class User {
 
 
     public boolean changeGender(Integer userID, String newGender){
-        if (this.userId.equals(userID)){
+        if (this.userId == userID){
             this.gender = newGender;
             return  true;
         } else {
