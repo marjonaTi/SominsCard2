@@ -1,19 +1,16 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.Scanner;
 
 public class Card {
-
-    private String  cardId;
-    private  double balance;
-    private short pinCode;
+    private Integer userId;
+    private String cardNumber;
+    private double balance;
+    private int pinCode;
     private String expriationDate;
     private String ownerData;
-    private Status cardStatus;
-    private List<Card> cardList = new ArrayList<>();
 
 
-    public Card( String expirationDate, String ownerInfo, short pinCode) {
+    public Card(int userId, String cardId, String expirationDate, String ownerInfo, int pinCode) {
+        this.cardNumber = cardId;
         this.pinCode = pinCode;
         this.expriationDate = expirationDate;
         this.ownerData = ownerInfo;
@@ -21,13 +18,20 @@ public class Card {
     }
 
 
-
-    public String getCardId() {
-        return cardId;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setCardId(String cardId) {
-        this.cardId = cardId;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    public String getCardNumber() {
+        return cardNumber;
+    }
+
+    public void setCardNumber(String cardNumber) {
+        this.cardNumber = cardNumber;
     }
 
     public double getBalance() {
@@ -38,11 +42,11 @@ public class Card {
         this.balance = balance;
     }
 
-    public short getPinCode() {
+    public int getPinCode() {
         return pinCode;
     }
 
-    public void setPinCode(short pinCode) {
+    public void setPinCode(int pinCode) {
         this.pinCode = pinCode;
     }
 
@@ -62,70 +66,127 @@ public class Card {
         this.ownerData = ownerData;
     }
 
-    public Status getCardstatus() {
-        return cardStatus;
-    }
-
-    public void setCardstatus(Status cardstatus) {
-        this.cardStatus = cardstatus;
-    }
-
-    public List<Card> getCardList() {
-        return cardList;
-    }
-
-    public void setCardList(List<Card> cardList) {
-        this.cardList = cardList;
-    }
-
-    @Override
-    public String toString() {
-        return "CARD: " +
-                "Id: " + cardId +
-                ", Balance: " + balance +
-                ", PinCode: " + pinCode +
-                ", ExpirationDate: " + expriationDate +
-                ", OwnerData: " + ownerData +
-                ",CardStatus: " + cardStatus +
-                 '\'' ;
-    }
-
-    public void  addMoney (String cardid, short pincode,Double blnc){
-        for (Card card: getCardList()) {
-            if (card.getCardId().equals(cardid) && card.getPinCode() == pincode){
-                if (blnc != null && blnc >0){
-                    card.setBalance(card.getBalance()+ blnc);
-
-                    System.out.println("Добавлено на карту:" + cardId + " " + "Баланс:" + card.getBalance());
-                }
-                else {
-                    System.out.println("ОШИБКА! Сумма должна быть положительной и не должна быть равно null.");
-                }
-            }
-
-        }
-    }
 
 
-
-    public boolean changePinCode(Card card, String ownerData, short newPin) {
-        if (card != null && card.getOwnerData().equals(ownerData)) {
-            card.setPinCode(newPin);
+// Меняет информацию о карте
+    public boolean changeOwnerData(String cardNumber, String newOwnerData) {
+        if (this.cardNumber.equals(cardNumber) ) {
+            this.ownerData = newOwnerData;
             return true;
         } else {
             return false;
         }
     }
 
-
-    public boolean changeOwnerData(Card card, String ownerData, String newOwnerData){
-        if (card != null && card.getOwnerData().equals(ownerData)){
-            card.setOwnerData(newOwnerData);
-            return true;
+    public boolean changePinCode(String cardNumber, int newPinCode){
+        if (this.cardNumber.equals(cardNumber)){
+            this.pinCode = newPinCode;
+            return  true;
         } else {
             return false;
         }
     }
 
+
+//    добавляет деньги на карту
+ public void addMoney(){
+    Scanner scanner = new Scanner(System.in);
+
+     System.out.println("----------------------------------");
+      System.out.println("Введите номер карты: ");
+       String enteredCardNum = scanner.nextLine();
+
+    System.out.println("Введите пин код: ");
+        int enterPinCode = scanner.nextInt();
+        scanner.nextLine();
+
+//      проверяем на совпадаемость введенного номера карты из списка
+    if (enteredCardNum.equals(this.cardNumber) &&
+                         enterPinCode == this.pinCode) {
+        System.out.println("Введите сумму: ");
+        double amount = scanner.nextDouble();
+        scanner.nextLine();
+
+        if (amount > 0) {
+            this.balance += amount;
+             System.out.println("Ваш баланс пополнен. Ваш баланс:" + this.balance);
+              System.out.println("------------------------------------------------");
+        } else {
+             System.out.println("ОШИБКА. Сумма должна быть положительной");
+        }
+    } else {
+             System.out.println("ОШИБКА. Неверный номер карты или пин код");
+    }
+}
+
+
+
+
+// Перевод денег с карты на карту
+public void transferMoney(Card card){
+        Scanner scanner =  new Scanner(System.in);
+    System.out.println("-----------------------------------");
+     System.out.println("Введите номер карты для перевода: ");
+      String cardNumber = scanner.nextLine();
+
+    if (cardNumber.equals(card.getCardNumber())){
+        System.out.println("Введите сумму для перевода: ");
+            double amount = scanner.nextDouble();
+
+        if (amount > 0 && amount <= this.balance){
+            this.balance -= amount;
+             card.balance += amount;
+              System.out.println("Перевод выполнен успешно.");
+               System.out.println("Ваш баланс: " + this.balance);
+                System.out.println("---------------------------------");
+        } else {
+            System.out.println("ОШИБКА! Недостаточно средств или неверная сумма для перевода.");
+
+        }
+    } else {
+            System.out.println("ОШИБКА! Неверный номер карты");
+    }
+}
+
+
+
+
+// Снимает деньги с карты на платежи
+  public void withdrawMoney (){
+        Scanner scanner = new Scanner(System.in);
+      System.out.println("--------------------------");
+       System.out.println("ВВедите номер карты: ");
+        String enteredCardNumber = scanner.nextLine();
+
+      System.out.println("Введите пин код: ");
+         Integer enterPinCode = scanner.nextInt();
+
+      if (enteredCardNumber.equals(this.cardNumber) && enterPinCode.equals(this.pinCode)){
+          System.out.println("КАТЕГОРИЯ ПЛАТЕЖА: ");
+           System.out.println("1. Кредит");
+            System.out.println("2. Интернет");
+             System.out.println("3. Налог");
+              System.out.println("4. Мобильные операторы");
+
+//          для выбора категории
+          int categoryChoice = scanner.nextInt();
+              scanner.nextLine();
+
+
+          System.out.println("Введите сумму для платежа: ");
+              double amount = scanner.nextDouble();
+
+          if (amount > 0 && amount <= this.balance){
+              this.balance -= amount;
+              System.out.println("Оплата прошла успешно. Ваш баланс: " + this.balance);
+               System.out.println("----------------------------------------------------");
+
+          } else {
+                System.out.println("ОШИБКА. Недостаточно средств или неверный ввод суммы.");
+          }
+      } else {
+          System.out.println("ОШИБКА. Неверный номер карты или пин код");
+      }
+  }
 
 }

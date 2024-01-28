@@ -3,27 +3,36 @@
 public class Main {
     public static void main(String[] args) {
 
-     Card card = new Card( "kewe", "jdkjwe", (short) 19);
-     User user = new User(1233, "Marjona", "Tilavova" , 17, "Female");
-     Platfort platfort = new Platfort();
+Platform platfort = new Platform();
 
-     platfort.addUser(53542,"Somin" , "hedhd", 27, "eujj");
+      User user1 = platfort.addUser("Dante","Russo",25,"Male");
+        Card card1 = platfort.addCard(user1,"123456789","12/27","Dante Russo",  1299);
+      User user2 = platfort.addUser("Kalix", "Monterosso", 29, "Male");
+        Card card2 = platfort.addCard(user2,"987654321","07/45","Kalix Monterosso", 3435);
 
-     platfort.addCard("12/23","Marjona", (short) 1212);
+//       platfort.showUser(user1);
+//       platfort.showCard(card1);
+//
+//
+//       platfort.showUser(user2);
+//       platfort.showCard(card2);
+//
+//
+//       user1.changeAge(1,27);
+//        platfort.showUser(user1);
+//
+//
+//       card2.changePinCode("987654321", 2334);
+//       platfort.showCard(card2);
 
-//        platfort.showUser();
-
-        card.addMoney("c678cf312ffc3401", (short) 1212, 12.000);
-
-        platfort.showCard();
-
-
-
-
-
-
-
-
+//       card1.addMoney();
+//          platfort.showCard(card1);
+//
+//          card1.transferMoney(card2);
+//          platfort.showCard(card2);
+//
+//          card2.withdrawMoney();
+//          platfort.showCard(card2);
 
 
 
